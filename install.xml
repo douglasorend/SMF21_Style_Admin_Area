@@ -329,6 +329,10 @@
 <!--------------------------------------------------------------------------->
 <file name="$sourcedir/ManageServer.php">
 	<operation>
+		<search position="before"><![CDATA[global $context, $txt, $scripturl, $boarddir]]></search>
+		<add><![CDATA[, $sourcedir]]></add>
+	</operation>
+	<operation>
 		<search position="before"><![CDATA['cache' => 'ModifyCacheSettings',]]></search>
 		<add><![CDATA['security' => 'ModifyGeneralSecuritySettings',
 		]]></add>

@@ -32,6 +32,9 @@ Crystal Project Icons | These icons are licensed under the GNU Lesser General Pu
 This mod was tested on SMF 2.0.8, but should work on earlier versions of SMF 2.0.x.  SMF 1.x is not and will not be supported.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+[b][u]v1.2 - November 2nd, 2014[/u][/b]
+o Fixed missing global variable declaration within [b]ManageServer.php[/b]...
+
 [b][u]v1.1 - November 1st, 2014[/u][/b]
 o Fixed some language string issues
 

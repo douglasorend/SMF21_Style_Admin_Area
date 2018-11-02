@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.9[/b][/size][/color]
+[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.10[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3907]Link to Mod[/url]
 [/center]
 [hr]
@@ -36,12 +36,12 @@ This mod was tested on SMF 2.0.10, but should work on earlier versions of SMF 2.
 [url=http://custom.simplemachines.org/mods/index.php?mod=3285]Integration Hooks Report[/url] can be installed at any time.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
-The changelog has been removed and can be seen at [url=http://www.xptsp.com/board/index.php?topic=16.msg140#msg140]XPtsp.com[/url].
+The changelog can be viewed at [url=http://www.xptsp.com/board/free-modifications/smf-2-1-style-admin-area/?tab=1]XPtsp.com[/url].
 
 [color=blue][b][size=12pt][u]License[/u][/size][/b][/color]
 The PHPInfo template code, source code, CSS style was copied from SMF 2.1 Alpha 1 under the BSD license.
 
-Copyright (c) 2015, Douglas Orend
+Copyright (c) 2015 - 2018, Douglas Orend
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:

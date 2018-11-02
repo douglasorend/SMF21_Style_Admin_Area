@@ -1,0 +1,123 @@
+/* Styles for the admin home screen.
+------------------------------------------------------- */
+fieldset.admin_group legend {
+	background: #eaf1f4;
+	border: 1px solid #cacdd3;
+	padding: 1px 5px;
+	border-radius: 3px;
+}
+fieldset.admin_group a {
+	display: inline-block;
+	width: 100px;
+	font-size: 85%;
+	text-align: center;
+	vertical-align: top;
+}
+
+/* The icons. */
+.large-admin-menu-icon:before {
+	background: url(../images/icons/admin_icons_hd.png) no-repeat;
+	background-position: -5px -131px;
+	margin: 0 auto;
+	display: block;
+	content: '';
+	width: 32px;
+	height: 32px;
+}
+.large-admin-menu-icon.corefeatures:before {
+	background-position: -47px -215px;
+}
+.large-admin-menu-icon.manageattachments:before {
+	background-position: -5px -5px;
+}
+.large-admin-menu-icon.ban:before {
+	background-position: -47px -5px;
+}
+.large-admin-menu-icon.manageboards:before {
+	background-position: -89px -5px;
+}
+.large-admin-menu-icon.managecalendar:before {
+	background-position: -131px -5px;
+}
+.large-admin-menu-icon.current_theme:before {
+	background-position: -173px -5px;
+}
+.large-admin-menu-icon.default:before {
+	background-position: -5px -47px;
+}
+.large-admin-menu-icon.sengines:before {
+	background-position: -47px -47px;
+}
+.large-admin-menu-icon.exit:before {
+	background-position: -89px -47px;
+}
+.large-admin-menu-icon.featuresettings:before {
+	background-position: -131px -47px;
+}
+.large-admin-menu-icon.languages:before {
+	background-position: -173px -47px;
+}
+.large-admin-menu-icon.logs:before {
+	background-position: -5px -89px;
+}
+.large-admin-menu-icon.mailqueue:before {
+	background-position: -47px -89px;
+}
+.large-admin-menu-icon.maintain:before {
+	background-position: -89px -89px;
+}
+.large-admin-menu-icon.membergroups:before {
+	background-position: -131px -89px;
+}
+.large-admin-menu-icon.viewmembers:before {
+	background-position: -173px -89px;
+}
+.large-admin-menu-icon.modsettings:before {
+	background-position: -5px -131px;
+}
+.large-admin-menu-icon.news:before {
+	background-position: -47px -131px;
+}
+.large-admin-menu-icon.packages:before {
+	background-position: -89px -131px;
+}
+.large-admin-menu-icon.paidsubscribe:before {
+	background-position: -131px -131px;
+}
+.large-admin-menu-icon.permissions:before {
+	background-position: -173px -131px;
+}
+.large-admin-menu-icon.postsettings:before {
+	background-position: -5px -173px;
+}
+.large-admin-menu-icon.regcenter:before {
+	background-position: -47px -173px;
+}
+.large-admin-menu-icon.reports:before {
+	background-position: -89px -173px;
+}
+.large-admin-menu-icon.scheduledtasks:before {
+	background-position: -131px -173px;
+}
+.large-admin-menu-icon.managesearch:before {
+	background-position: -173px -173px;
+}
+.large-admin-menu-icon.antispam:before {
+	background-position: -215px -5px;
+}
+.large-admin-menu-icon.serversettings:before {
+	background-position: -215px -47px;
+}
+.large-admin-menu-icon.smileys:before {
+	background-position: -215px -89px;
+}
+.large-admin-menu-icon.credits:before {
+	background-position: -215px -131px;
+}
+.large-admin-menu-icon.theme:before {
+	background-position: -215px -173px;
+}
+.large-admin-menu-icon.warnings:before {
+	background-position: -5px -215px;
+}
+

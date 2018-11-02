@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>dougiefresh:ReorganizedAdminArea</id>
+<name>SMF 2.1-style Admin Area</name>
+<version>1.0</version>
+
+<!-------------------------------------------------------------------------->
+<!-- Language file edits (English-British - Admin)                        -->
+<!-------------------------------------------------------------------------->
+<file name="$themedir/languages/Admin.english_british.php" error="skip">
+	<operation>
+		<search position="after"><![CDATA[global $settings, $scripturl;]]></search>
+		<add><![CDATA[
+		
+// BEGIN: Reorganized Admin Area
+$txt['security_settings'] = 'Security';
+// END: Reorganized Admin Area]]></add>
+	</operation>
+</file>
+</modification>

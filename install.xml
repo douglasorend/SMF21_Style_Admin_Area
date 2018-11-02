@@ -1,0 +1,388 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>dougiefresh:ReorganizedAdminArea</id>
+<name>SMF 2.1-style Admin Area</name>
+<version>1.0</version>
+
+<file name="$sourcedir/Admin.php">
+<!--------------------------------------------------------------------------->
+<!-- Language Inclusion & Subs file include for Admin Center               -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA[loadLanguage('Admin');]]></search>
+		<add><![CDATA[loadLanguage('Admin+ModerationCenter');
+	]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!-- Adminstration Center rewrite, similar to SMF 2.1 Alpha 1              -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="after"><![CDATA[$context['sub_template'] = $context['admin_area'] == 'credits' ? 'credits' : 'admin';]]></search>
+		<add><![CDATA[loadTemplate('Admin', 'smf21_style');
+	]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[unset($admin_areas);]]></search>
+		<add><![CDATA[if (!isset($_REQUEST['area']) || $_REQUEST['area'] == 'index')
+		$context['reorganized_admin_areas'] = $admin_areas;
+	unset($admin_areas);]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!-- Move : Forum => Posts & Topics => Bulletin Board Code                 -->
+<!--   To : Configuration => Features & Options => Bulletin Board Code     -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA['layout' => array($txt['mods_cat_layout']),
+						'karma' => array($txt['karma'], 'enabled' => in_array('k', $context['admin_features'])),
+						'sig' => array($txt['signature_settings_short']),
+						'profile' => array($txt['custom_profile_shorttitle'], 'enabled' => in_array('cp', $context['admin_features'])),]]></search>
+		<add><![CDATA['bbc' => array($txt['manageposts_bbc_settings']),
+						'layout' => array($txt['mods_cat_layout']),
+						'sig' => array($txt['signature_settings_short']),
+						'profile' => array($txt['custom_profile_shorttitle'], 'enabled' => in_array('cp', $context['admin_features'])),
+						'karma' => array($txt['karma'], 'enabled' => in_array('k', $context['admin_features'])),]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA['posts' => array($txt['manageposts_settings']),
+						'bbc' => array($txt['manageposts_bbc_settings']),]]></search>
+		<add><![CDATA['posts' => array($txt['manageposts_settings']),]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!-- Hide : Configuration => Security and Moderation                       -->
+<!--  Add : Configuration => Anti-Spam (from Security/Moderation)          -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA['securitysettings' => array(]]></search>
+		<add><![CDATA['antispam' => array(
+					'label' => $txt['antispam_title'],
+					'file' => 'ManageSettings.php',
+					'function' => 'ModifySecuritySettings',
+					'icon' => 'security.gif',
+					'subsections' => array(
+						'spam' => array($txt['antispam_title']),
+					),
+				),
+				'securitysettings' => array(
+					'hidden' => true,]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!--  Add : Admin => Attachments & Avatars => Attachment Directories       -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="after"><![CDATA['maintenance' => array($txt['attachment_manager_maintenance']),]]></search>
+		<add><![CDATA['attachpaths' => array($txt['attachmentUploadDir_multiple']),
+						]]></add>
+	</operation>
+	
+<!--------------------------------------------------------------------------->
+<!-- Move : Members => Search Engines to Forum => Search Engines           -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA['settings' => array($txt['settings']),
+					),
+				),
+				'sengines' => array(
+					'label' => $txt['search_engines'],
+					'enabled' => in_array('sp', $context['admin_features']),
+					'file' => 'ManageSearchEngines.php',
+					'icon' => 'engines.gif',
+					'function' => 'SearchEngines',
+					'permission' => 'admin_forum',
+					'subsections' => array(
+						'stats' => array($txt['spider_stats']),
+						'logs' => array($txt['spider_logs']),
+						'spiders' => array($txt['spiders']),
+						'settings' => array($txt['settings']),
+					),
+				),]]></search>
+		<add><![CDATA['settings' => array($txt['settings']),
+					),
+				),]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[
+			),
+		),
+		'members' => array(]]></search>
+		<add><![CDATA[
+				'sengines' => array(
+					'label' => $txt['search_engines'],
+					'enabled' => in_array('sp', $context['admin_features']),
+					'file' => 'ManageSearchEngines.php',
+					'icon' => 'engines.gif',
+					'function' => 'SearchEngines',
+					'permission' => 'admin_forum',
+					'subsections' => array(
+						'stats' => array($txt['spider_stats']),
+						'logs' => array($txt['spider_logs']),
+						'spiders' => array($txt['spiders']),
+						'settings' => array($txt['settings']),
+					),
+				),
+			),
+		),
+		'members' => array(]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!-- Move :                                                                -->
+<!--   (1) Configuration => Server Settings                                -->
+<!--   (2) Configuration => Security and Moderation => General             -->
+<!--  To => Maintenance => Server Settings                                 -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA['serversettings' => array(
+					'label' => $txt['admin_server_settings'],
+					'file' => 'ManageServer.php',
+					'function' => 'ModifySettings',
+					'icon' => 'server.gif',
+					'subsections' => array(
+						'general' => array($txt['general_settings']),
+						'database' => array($txt['database_paths_settings']),
+						'cookie' => array($txt['cookies_sessions_settings']),
+						'cache' => array($txt['caching_settings']),
+						'loads' => array($txt['load_balancing_settings']),
+					),
+				),
+				'current_theme' => array(]]></search>
+		<add><![CDATA['current_theme' => array(]]></add>
+	</operation>
+	<operation>
+		<search position="after"><![CDATA['maintain' => array(]]></search>
+		<add><![CDATA['serversettings' => array(
+					'label' => $txt['admin_server_settings'],
+					'file' => 'ManageServer.php',
+					'function' => 'ModifySettings',
+					'icon' => 'server.gif',
+					'subsections' => array(
+						'general' => array($txt['general_settings']),
+						'database' => array($txt['database_paths_settings']),
+						'cookie' => array($txt['cookies_sessions_settings']),
+						'security' => array($txt['security_settings']),
+						'cache' => array($txt['caching_settings']),
+						'loads' => array($txt['load_balancing_settings']),
+					),
+				),
+				]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!-- Move : Config => Security/Moderation => Moderation Settings           -->
+<!--   To : Members => Warnings                                            -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="after"><![CDATA['ban' => array(]]></search>
+		<add><![CDATA['warnings' => array(
+					'label' => $txt['mc_warnings'],
+					'file' => 'ManageSettings.php',
+					'function' => 'ModifySecuritySettings',
+					'icon' => 'security.gif',
+					'subsections' => array(
+						'moderation' => array($txt['moderation_settings_short'], 'enabled' => substr($modSettings['warning_settings'], 0, 1) == 1),
+					),
+				),
+				]]></add>
+	</operation>
+</file>
+
+<!--------------------------------------------------------------------------->
+<!-- Move : Forum => Posts & Topics => Bulletin Board Code                 -->
+<!--   To : Configuration => Features & Options => Bulletin Board Code     -->
+<!--------------------------------------------------------------------------->
+<file name="$sourcedir/ManageSettings.php">
+	<operation>
+		<search position="before"><![CDATA[function ModifyFeatureSettings()
+{
+	global $context, $txt, $scripturl, $modSettings, $settings]]></search>
+		<add><![CDATA[, $sourcedir]]></add>
+	</operation>
+	<operation>
+		<search position="after"><![CDATA['layout' => 'ModifyLayoutSettings',]]></search>
+		<add><![CDATA['bbc' => 'ModifyBBCSettings',
+		]]></add>
+	</operation>
+	<operation>
+		<search position="after"><![CDATA['layout' => array(
+			),
+			'karma' => array(
+			),
+			'sig' => array(
+				'description' => $txt['signature_settings_desc'],
+			),
+			'profile' => array(
+				'description' => $txt['custom_profile_desc'],
+			),]]></search>
+		<add><![CDATA['bbc' => array(
+				'description' => $txt['manageposts_bbc_settings_description'],
+			),
+			'layout' => array(
+			),
+			'sig' => array(
+				'description' => $txt['signature_settings_desc'],
+			),
+			'profile' => array(
+				'description' => $txt['custom_profile_desc'],
+			),
+			'karma' => array(
+			),]]></add>
+	</operation>
+	
+<!--------------------------------------------------------------------------->
+<!--  Add : Admin => Config => Anti-Spam (from Security/Moderation)        -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA[// Call the right function for this sub-acton.
+	$subActions[$_REQUEST['sa']]();
+}
+
+// This function passes control through to the relevant security tab.]]></search>
+		<add><![CDATA[// Call the right function for this sub-acton.
+	if ($_REQUEST['sa'] == 'bbc')
+		require_once($sourcedir . '/ManagePosts.php');
+	$subActions[$_REQUEST['sa']]();
+}
+
+// This function passes control through to the relevant security tab.]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!-- Move : Config => Security/Moderation => Moderation Settings           -->
+<!--   To : Members => Warnings                                            -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA[// Call the right function for this sub-acton.
+	$subActions[$_REQUEST['sa']]();
+}
+
+// This my friend, is for all the mod authors out there. They're like builders without the ass crack - with the possible exception of... /cut short]]></search>
+		<add><![CDATA[// Call the right function for this sub-acton.
+	if ($_REQUEST['area'] == 'securitysettings')
+	{
+		if (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'moderation')
+			redirectexit('action=admin;area=warnings;' . $context['session_var'] . '=' . $context['session_id']);
+		elseif (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'spam')
+			redirectexit('action=admin;area=antispam;' . $context['session_var'] . '=' . $context['session_id']);
+		else
+			redirectexit('action=admin;area=serversettings;sa=security;' . $context['session_var'] . '=' . $context['session_id']);
+	}
+	elseif ($_REQUEST['area'] == 'warnings')
+	{
+		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['general']);
+		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['spam']);
+		$subActions['moderation']();
+	}
+	elseif ($_REQUEST['area'] == 'antispam')
+	{
+		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['general']);
+		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['moderation']);
+		$subActions['spam']();
+	}
+	elseif ($_REQUEST['area'] == 'security')
+	{
+		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['general']);
+		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['moderation']);
+		$subActions['general']();
+	}
+	else 
+		$subActions[$_REQUEST['sa']]();
+}
+
+// This my friend, is for all the mod authors out there. They're like builders without the ass crack - with the possible exception of... /cut short]]></add>
+	</operation>
+
+</file>
+
+<!--------------------------------------------------------------------------->
+<!-- Move : Forum => Posts & Topics => Bulletin Board Code                 -->
+<!--   To : Configuration => Features & Options => Bulletin Board Code     -->
+<!--------------------------------------------------------------------------->
+<file name="$sourcedir/ManagePosts.php">
+	<operation>
+		<search position="replace"><![CDATA['bbc' => array(
+				'description' => $txt['manageposts_bbc_settings_description'],
+			),
+			'censor' => array(]]></search>
+		<add><![CDATA['censor' => array(]]></add>
+	</operation>
+
+<!--------------------------------------------------------------------------->
+<!-- Move : Config => Security/Moderation => Moderation Settings           -->
+<!--   To : Members => Warnings                                            -->
+<!--------------------------------------------------------------------------->
+	<operation>
+		<search position="replace"><![CDATA[// Call the right function for this sub-action.]]></search>
+		<add><![CDATA[
+	if (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'bbc')
+		redirectexit('action=admin;area=featuresettings;sa=bbc;' . $context['session_var'] . '=' . $context['session_id']);]]></add>
+	</operation>
+</file>
+
+<!--------------------------------------------------------------------------->
+<!-- Move :                                                                -->
+<!--   (2) Configuration => Security and Moderation => General             -->
+<!--  To => Maintenance => Server Settings => Security                     -->
+<!--------------------------------------------------------------------------->
+<file name="$sourcedir/ManageServer.php">
+	<operation>
+		<search position="before"><![CDATA['cache' => 'ModifyCacheSettings',]]></search>
+		<add><![CDATA['security' => 'ModifyGeneralSecuritySettings',
+		]]></add>
+	</operation>
+	<operation>
+		<search position="before"><![CDATA[// Call the right function for this sub-action.]]></search>
+		<add><![CDATA[
+	if (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'security')
+		require_once($sourcedir . '/ManageSettings.php');]]></add>
+	</operation>
+</file>
+
+<!--------------------------------------------------------------------------->
+<!-- Adminstration Center rewrite, similar to SMF 2.1 Alpha 1              -->
+<!--------------------------------------------------------------------------->
+<file name="$themedir/Admin.template.php">
+	<operation>
+		<search position="replace"><![CDATA[echo '
+		<div class="windowbg2 clear_right">
+			<span class="topslice"><span></span></span>
+			<div class="content">
+				<ul id="quick_tasks" class="flow_hidden">';
+
+	foreach ($context['quick_admin_tasks'] as $task)
+		echo '
+					<li>
+						', !empty($task['icon']) ? '<a href="' . $task['href'] . '"><img src="' . $settings['default_images_url'] . '/admin/' . $task['icon'] . '" alt="" class="home_image png_fix" /></a>' : '', '
+						<h5>', $task['link'], '</h5>
+						<span class="task">', $task['description'],'</span>
+					</li>';
+
+	echo '
+				</ul>
+			</div>
+			<span class="botslice clear"><span></span></span>
+		</div>
+	</div>
+	<br class="clear" />';]]></search>
+		<add><![CDATA[foreach ($context['reorganized_admin_areas'] as $name1 => $area1)
+	{
+		echo '
+		<fieldset id="group_', $name1, '" class="windowbg admin_group">
+			<legend>', $area1['title'], '</legend>';
+		foreach ($area1['areas'] as $name2 => $area2)
+		{
+			if ($name2 != 'index' && $name2 != 'search' && (!isset($area2['enabled']) || $area2['enabled']) && (!isset($area2['hidden']) || !$area2['hidden']))
+				echo '
+				<a href="', (isset($area2['custom_url']) ?  $area2['custom_url'] : $scripturl . '/index.php?action=admin;area=' . $name2) . ';' . $context['session_var'] . '=' . $context['session_id'] . '"  class="large-admin-menu-icon ' . $name2 . '">' . (isset($area2['label']) ? $area2['label'] : '') . '</a>';
+		}
+		echo '
+		</fieldset>';
+	}
+	echo '
+	</div>';]]></add>
+	</operation>
+</file>
+</modification>

@@ -182,6 +182,7 @@
 					'file' => 'ManageSettings.php',
 					'function' => 'ModifySecuritySettings',
 					'icon' => 'security.gif',
+					'enabled' => substr($modSettings['warning_settings'], 0, 1) == 1,
 					'subsections' => array(
 						'moderation' => array($txt['moderation_settings_short'], 'enabled' => substr($modSettings['warning_settings'], 0, 1) == 1),
 					),

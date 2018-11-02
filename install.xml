@@ -148,7 +148,10 @@
 <!--  To => Maintenance => Server Settings                                 -->
 <!--------------------------------------------------------------------------->
 	<operation>
-		<search position="replace"><![CDATA['serversettings' => array(
+		<search position="replace"><![CDATA['settings' => array($txt['language_settings']),
+					),
+				),
+				'serversettings' => array(
 					'label' => $txt['admin_server_settings'],
 					'file' => 'ManageServer.php',
 					'function' => 'ModifySettings',
@@ -160,9 +163,10 @@
 						'cache' => array($txt['caching_settings']),
 						'loads' => array($txt['load_balancing_settings']),
 					),
-				),
-				'current_theme' => array(]]></search>
-		<add><![CDATA['current_theme' => array(]]></add>
+				),]]></search>
+		<add><![CDATA['settings' => array($txt['language_settings']),
+					),
+				),]]></add>
 	</operation>
 	<operation>
 		<search position="after"><![CDATA['maintain' => array(]]></search>

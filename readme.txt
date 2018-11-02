@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.6[/b][/size][/color]
+[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.7[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3907]Link to Mod[/url]
 [/center]
 [hr]
@@ -37,6 +37,9 @@ This mod was tested on SMF 2.0.8, but should work on earlier versions of SMF 2.0
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.7 - December 4th, 2014[/u][/b]
+o Changed mod for better install compatibility with [url=http://custom.simplemachines.org/mods/index.php?mod=348]Staff Page Mod[/url].
+
 [b][u]v1.6 - November 15th, 2014[/u][/b]
 o Fixed potential "missing file" problem with uninstalling mod.
 

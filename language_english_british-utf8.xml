@@ -8,7 +8,7 @@
 <!-------------------------------------------------------------------------->
 <!-- Language file edits (English-British - Admin)                        -->
 <!-------------------------------------------------------------------------->
-<file name="$themedir/languages/Admin.english_british-utf8.php" error="skip">
+<file name="$languagedir/Admin.english_british-utf8.php" error="skip">
 	<operation>
 		<search position="after"><![CDATA[global $settings, $scripturl;]]></search>
 		<add><![CDATA[

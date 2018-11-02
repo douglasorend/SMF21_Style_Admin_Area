@@ -11,8 +11,11 @@
 		<add><![CDATA[call_integration_hook('integrate_admin_areas', array(&$admin_areas));
 		
 	// BEGIN MOD SMF 2.1-style Admin Menu
-	require_once($sourcedir . '/Subs-SMF21_Style.php');
-	SMF21_Style_Admin_Area($admin_areas);]]></add>
+	if (file_exists($sourcedir . '/Subs-SMF21_Style.php'))
+	{
+		require_once($sourcedir . '/Subs-SMF21_Style.php');
+		SMF21_Style_Admin_Area($admin_areas);
+	}]]></add>
 	</operation>
 
 <!--------------------------------------------------------------------------->

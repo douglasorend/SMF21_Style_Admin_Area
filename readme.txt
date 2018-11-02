@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.5[/b][/size][/color]
+[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.6[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3907]Link to Mod[/url]
 [/center]
 [hr]
@@ -37,6 +37,9 @@ This mod was tested on SMF 2.0.8, but should work on earlier versions of SMF 2.0
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.6 - November 15th, 2014[/u][/b]
+o Fixed potential "missing file" problem with uninstalling mod.
+
 [b][u]v1.5 - November 11th, 2014[/u][/b]
 o Added code to duplicate SMF 2.1's PHP Info screen in [b]Maintenance[/b] => [b]Server Settings[/b] => [b]PHP Info[/b]....
 o Fixed code for saving settings within [b]Configuration[/b] => [b]Anti-Spam[/b]...

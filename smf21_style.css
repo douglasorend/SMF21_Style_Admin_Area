@@ -120,4 +120,18 @@ fieldset.admin_group a {
 .large-admin-menu-icon.warnings:before {
 	background-position: -5px -215px;
 }
-
+.large-admin-menu-icon.forumfirewall:before {
+	background-position: -131px -215px;
+}
+.large-admin-menu-icon.badbehavior:before {
+	background-position: -89px -215px;
+}
+.large-admin-menu-icon.httpBL:before {
+	background-position: -173px -215px;
+}
+.large-admin-menu-icon.akismet:before {
+	background-position: -215px -215px;
+}
+.large-admin-menu-icon.optimus:before {
+	background-position: -47px -47px;
+}

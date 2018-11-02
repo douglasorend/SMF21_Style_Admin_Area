@@ -3,7 +3,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>dougiefresh:ReorganizedAdminArea</id>
 	<name>SMF 2.1-style Admin Area</name>
-	<version>1.2</version>
+	<version>1.4</version>
 	<type>modification</type>
 
 	<install for="2.0 - 2.0.99">
@@ -15,6 +15,7 @@
 		<modification>language_english_british-utf8.xml</modification>
 		<require-file name="smf21_style.css" destination="$themedir/css" />
 		<require-file name="admin_icons_hd.png" destination="$imagesdir/icons" />
+		<require-file name="Subs-SMF21_Style.php" destination="$sourcedir" />
 	</install>
 	<uninstall for="2.0 - 2.0.99">
 		<modification reverse="true">install.xml</modification>
@@ -24,5 +25,6 @@
 		<modification reverse="true">language_english_british-utf8.xml</modification>
 		<remove-file name="$themedir/css/smf21_style.css" />
 		<remove-file name="$imagesdir/icons/admin_icons_hd.png" />
+		<remove-file name="$sourcedir/Subs-SMF21_Style.php" />
 	</uninstall>
 </package-info>

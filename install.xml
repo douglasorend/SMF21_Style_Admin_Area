@@ -6,6 +6,15 @@
 <version>1.0</version>
 
 <file name="$sourcedir/Admin.php">
+	<operation>
+		<search position="replace"><![CDATA[call_integration_hook('integrate_admin_areas', array(&$admin_areas));]]></search>
+		<add><![CDATA[call_integration_hook('integrate_admin_areas', array(&$admin_areas));
+		
+	// BEGIN MOD SMF 2.1-style Admin Menu
+	require_once($sourcedir . '/Subs-SMF21_Style.php');
+	SMF21_Style_Admin_Area($admin_areas);]]></add>
+	</operation>
+
 <!--------------------------------------------------------------------------->
 <!-- Language Inclusion & Subs file include for Admin Center               -->
 <!--------------------------------------------------------------------------->
@@ -388,6 +397,21 @@
 	}
 	echo '
 	</div>';]]></add>
+	</operation>
+</file>
+
+<file name="$sourcedir/ManageMaintenance.php">
+	<operation>
+		<search position="replace"><![CDATA['function' => 'Destroy',
+			'activities' => array(),
+		),]]></search>
+		<add><![CDATA['function' => 'Destroy',
+			'activities' => array(),
+		),
+		'hooks' => array(
+			'function' => 'SMF21_list_integration_hooks',
+			'activities' => array(),
+		),]]></add>
 	</operation>
 </file>
 </modification>

@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.3[/b][/size][/color]
+[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.4[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3907]Link to Mod[/url]
 [/center]
 [hr]
@@ -24,6 +24,7 @@ o Moved [b]Configuration[/b] => [b]Server Settings[/b] to [b]Maintenance[/b] => 
 o Moved [b]Configuration[/b] => [b]Security and Moderation[/b] => [b]Moderation Settings[/b] to [b]Members[/b] => [b]Warnings[/b]
 o Calling [b]Configuration[/b] => [b]Security and Moderation[/b] subsections via url redirects to correct location
 o Calling [b]Forum[/b] => [b]Posts & Topics[/b] => [b]Bulletin Board Code[/b] via url redirects to correct location
+o Moved [b]Configuration[/b] => [b]Modification Settings[/b] => [b]Integration Hooks[/b] to [b]Maintenance[/b] -> [b]Forum Maintenance[/b]
 
 [color=blue][b][size=12pt][u]Third Party Graphics (borrowed from SMF 2.1)[/u][/size][/b][/color]
 Crystal Project Icons | These icons are licensed under the GNU Lesser General Public Licence
@@ -31,7 +32,14 @@ Crystal Project Icons | These icons are licensed under the GNU Lesser General Pu
 [color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
 This mod was tested on SMF 2.0.8, but should work on earlier versions of SMF 2.0.x.  SMF 1.x is not and will not be supported.
 
+[url=http://custom.simplemachines.org/mods/index.php?mod=3285]Integration Hooks Report[/url] can be installed at any time.
+
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+[quote]
+[b][u]v1.4 - November 8th, 2014[/u][/b]
+o Minor changes to give [url=http://custom.simplemachines.org/mods/index.php?mod=2155]httpBL[/url], [url=http://custom.simplemachines.org/mods/index.php?mod=2815]Forum Firewall[/url] and [url=http://custom.simplemachines.org/mods/index.php?mod=2502]Bad Behavior[/url] mods icons in the Admin Area
+o Added code to move [url=http://custom.simplemachines.org/mods/index.php?mod=3285]Integration Hooks Report[/url] mod to the [b]Maintenance[/b] -> [b]Forum Maintenance[/b] area.
+
 [b][u]v1.3 - November 6th, 2014[/u][/b]
 o Fixed an issue with the [b]Warnings[/b] section being shown when it isn't enabled....
 
@@ -43,6 +51,7 @@ o Fixed some language string issues
 
 [b][u]v1.0 - August 11th, 2014[/u][/b]
 o Initial Release
+[/quote]
 
 [hr]
 [url=http://creativecommons.org/licenses/by/3.0][img]http://i.creativecommons.org/l/by/3.0/80x15.png[/img][/url]

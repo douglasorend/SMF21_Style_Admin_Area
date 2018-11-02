@@ -1,0 +1,30 @@
+v1.8 - June 5th, 2015
+o Fixed not saving settings issue with Bulletin Board Codes page.
+
+v1.7 - December 4th, 2014
+o Changed mod for better install compatibility with Staff Page Mod.
+
+v1.6 - November 15th, 2014
+o Fixed potential "missing file" problem with uninstalling mod.
+
+v1.5 - November 11th, 2014
+o Added code to duplicate SMF 2.1's PHP Info screen in Maintenance => Server Settings => PHP Info....
+o Fixed code for saving settings within Configuration => Anti-Spam...
+o Fixed code for saving settings within Maintenance => Server Settings => Security...
+o Fixed code for saving settings within Members => Warnings...
+
+v1.4 - November 8th, 2014
+o Minor changes to give httpBL, Forum Firewall and Bad Behavior mods icons in the Admin Area
+o Added code to move Integration Hooks Report mod to the Maintenance -> Forum Maintenance area.
+
+v1.3 - November 6th, 2014
+o Fixed an issue with the Warnings section being shown when it isn't enabled....
+
+v1.2 - November 2nd, 2014
+o Fixed missing global variable declaration within ManageServer.php...
+
+v1.1 - November 1st, 2014
+o Fixed some language string issues
+
+v1.0 - August 11th, 2014
+o Initial Release

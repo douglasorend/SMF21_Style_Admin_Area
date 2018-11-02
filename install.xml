@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:ReorganizedAdminArea</id>
 <name>SMF 2.1-style Admin Area</name>
-<version>1.5</version>
+<version>1.8</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
@@ -367,6 +367,16 @@
 			),
 			'censor' => array(]]></search>
 		<add><![CDATA['censor' => array(]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[redirectexit('action=admin;area=postsettings;sa=bbc');
+	}
+
+	$context['post_url'] = $scripturl . '?action=admin;area=postsettings;save;sa=bbc';]]></search>
+		<add><![CDATA[redirectexit('action=admin;area=featuresettings;sa=bbc');
+	}
+
+	$context['post_url'] = $scripturl . '?action=admin;area=featuresettings;sa=bbc;save';]]></add>
 	</operation>
 
 <!--------------------------------------------------------------------------->

@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.4[/b][/size][/color]
+[center][color=red][size=16pt][b]SMF 2.1-STYLE ADMIN AREA v1.5[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3907]Link to Mod[/url]
 [/center]
 [hr]
@@ -25,6 +25,7 @@ o Moved [b]Configuration[/b] => [b]Security and Moderation[/b] => [b]Moderation 
 o Calling [b]Configuration[/b] => [b]Security and Moderation[/b] subsections via url redirects to correct location
 o Calling [b]Forum[/b] => [b]Posts & Topics[/b] => [b]Bulletin Board Code[/b] via url redirects to correct location
 o Moved [b]Configuration[/b] => [b]Modification Settings[/b] => [b]Integration Hooks[/b] to [b]Maintenance[/b] -> [b]Forum Maintenance[/b]
+o Added [b]Maintenance[/b] => [b]Server Settings[/b] => [b]PHP Info[/b] using SMF 2.1's code....
 
 [color=blue][b][size=12pt][u]Third Party Graphics (borrowed from SMF 2.1)[/u][/size][/b][/color]
 Crystal Project Icons | These icons are licensed under the GNU Lesser General Public Licence
@@ -36,6 +37,12 @@ This mod was tested on SMF 2.0.8, but should work on earlier versions of SMF 2.0
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.5 - November 11th, 2014[/u][/b]
+o Added code to duplicate SMF 2.1's PHP Info screen in [b]Maintenance[/b] => [b]Server Settings[/b] => [b]PHP Info[/b]....
+o Fixed code for saving settings within [b]Configuration[/b] => [b]Anti-Spam[/b]...
+o Fixed code for saving settings within [b]Maintenance[/b] => [b]Server Settings[/b] => [b]Security[/b]...
+o Fixed code for saving settings within [b]Members[/b] => [b]Warnings[/b]...
+
 [b][u]v1.4 - November 8th, 2014[/u][/b]
 o Minor changes to give [url=http://custom.simplemachines.org/mods/index.php?mod=2155]httpBL[/url], [url=http://custom.simplemachines.org/mods/index.php?mod=2815]Forum Firewall[/url] and [url=http://custom.simplemachines.org/mods/index.php?mod=2502]Bad Behavior[/url] mods icons in the Admin Area
 o Added code to move [url=http://custom.simplemachines.org/mods/index.php?mod=3285]Integration Hooks Report[/url] mod to the [b]Maintenance[/b] -> [b]Forum Maintenance[/b] area.

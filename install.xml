@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:ReorganizedAdminArea</id>
 <name>SMF 2.1-style Admin Area</name>
-<version>1.0</version>
+<version>1.5</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
@@ -175,6 +175,7 @@
 						'security' => array($txt['security_settings']),
 						'cache' => array($txt['caching_settings']),
 						'loads' => array($txt['load_balancing_settings']),
+						'phpinfo' => array($txt['phpinfo_settings']),
 					),
 				),
 				]]></add>
@@ -280,7 +281,7 @@
 		else
 			redirectexit('action=admin;area=serversettings;sa=security;' . $context['session_var'] . '=' . $context['session_id']);
 	}
-	elseif ($_REQUEST['area'] == 'warnings')
+	if ($_REQUEST['area'] == 'warnings')
 	{
 		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['general']);
 		unset($context[$context['admin_menu_name']]['tab_data']['tabs']['spam']);
@@ -304,7 +305,48 @@
 
 // This my friend, is for all the mod authors out there. They're like builders without the ass crack - with the possible exception of... /cut short]]></add>
 	</operation>
+	<operation>
+		<search position="replace"><![CDATA[redirectexit('action=admin;area=securitysettings;sa=spam');]]></search>
+		<add><![CDATA[redirectexit('action=admin;area=antispam');]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[$context['post_url'] = $scripturl . '?action=admin;area=securitysettings;save;sa=spam';]]></search>
+		<add><![CDATA[$context['post_url'] = $scripturl . '?action=admin;area=antispam;save';]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[redirectexit('action=admin;area=securitysettings;sa=moderation');]]></search>
+		<add><![CDATA[redirectexit('action=admin;area=warnings');]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[$context['post_url'] = $scripturl . '?action=admin;area=securitysettings;save;sa=moderation';]]></search>
+		<add><![CDATA[$context['post_url'] = $scripturl . '?action=admin;area=warnings;save';]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[redirectexit('action=admin;area=securitysettings;sa=general');]]></search>
+		<add><![CDATA[redirectexit('action=admin;area=serversettings;sa=security;' . $context['session_var'] . '=' . $context['session_id']);]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[$context['post_url'] = $scripturl . '?action=admin;area=securitysettings;save;sa=general';]]></search>
+		<add><![CDATA[$context['post_url'] = $scripturl . '?action=admin;area=serversettings;sa=security;save';]]></add>
+	</operation>
+</file>
 
+<!--------------------------------------------------------------------------->
+<!-- Add: Maintenance => Server Settings => Integration Hooks
+<!--------------------------------------------------------------------------->
+<file name="$sourcedir/ManageMaintenance.php">
+	<operation>
+		<search position="replace"><![CDATA['function' => 'Destroy',
+			'activities' => array(),
+		),]]></search>
+		<add><![CDATA['function' => 'Destroy',
+			'activities' => array(),
+		),
+		'hooks' => array(
+			'function' => 'SMF21_list_integration_hooks',
+			'activities' => array(),
+		),]]></add>
+	</operation>
 </file>
 
 <!--------------------------------------------------------------------------->
@@ -343,15 +385,76 @@
 		<add><![CDATA[, $sourcedir]]></add>
 	</operation>
 	<operation>
-		<search position="before"><![CDATA['cache' => 'ModifyCacheSettings',]]></search>
-		<add><![CDATA['security' => 'ModifyGeneralSecuritySettings',
-		]]></add>
+		<search position="replace"><![CDATA['cache' => 'ModifyCacheSettings',
+		'loads' => 'ModifyLoadBalancingSettings',]]></search>
+		<add><![CDATA['cache' => 'ModifyCacheSettings',
+		'security' => 'ModifyGeneralSecuritySettings',
+		'loads' => 'ModifyLoadBalancingSettings',
+		'phpinfo' => 'ShowPHPinfoSettings',]]></add>
 	</operation>
 	<operation>
 		<search position="before"><![CDATA[// Call the right function for this sub-action.]]></search>
 		<add><![CDATA[
-	if (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'security')
+	if ($_REQUEST['sa'] == 'security')
 		require_once($sourcedir . '/ManageSettings.php');]]></add>
+	</operation>
+	
+	<operation>
+		<search position="replace"><![CDATA[save_inline_permissions($inlinePermissions);
+	}
+}]]></search>
+		<add><![CDATA[save_inline_permissions($inlinePermissions);
+	}
+}
+
+/**
+ * Allows us to see the servers php settings
+ *
+ * - loads the settings into an array for display in a template
+ * - drops cookie values just in case
+ */
+function ShowPHPinfoSettings()
+{
+	global $context, $txt;
+
+	$info_lines = array();
+	$category = $txt['phpinfo_settings'];
+
+	// get the data
+	ob_start();
+	phpinfo();
+
+	// We only want it for its body, pigs that we are
+	$info_lines = preg_replace('~^.*<body>(.*)</body>.*$~', '$1', ob_get_contents());
+	$info_lines = explode("\n", strip_tags($info_lines, "<tr><td><h2>"));
+	ob_end_clean();
+
+	// remove things that could be considered sensitive
+	$remove = '_COOKIE|Cookie|_GET|_REQUEST|REQUEST_URI|QUERY_STRING|REQUEST_URL|HTTP_REFERER';
+
+	// put all of it into an array
+	foreach ($info_lines as $line)
+	{
+		if (preg_match('~(' . $remove . ')~', $line))
+			continue;
+
+		// new category?
+		if (strpos($line, '<h2>') !== false)
+			$category = preg_match('~<h2>(.*)</h2>~', $line, $title) ? $category = $title[1] : $category;
+
+		// load it as setting => value or the old setting local master
+		if (preg_match('~<tr><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td></tr>~', $line, $val))
+			$pinfo[$category][$val[1]] = $val[2];
+		elseif (preg_match('~<tr><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td></tr>~', $line, $val))
+			$pinfo[$category][$val[1]] = array($txt['phpinfo_localsettings'] => $val[2], $txt['phpinfo_defaultsettings'] => $val[3]);
+	}
+
+	// load it in to context and display it
+	$context['pinfo'] = $pinfo;
+	$context['page_title'] = $txt['admin_server_settings'];
+	$context['sub_template'] = 'php_info';
+	return;
+}]]></add>
 	</operation>
 </file>
 
@@ -398,20 +501,91 @@
 	echo '
 	</div>';]]></add>
 	</operation>
-</file>
-
-<file name="$sourcedir/ManageMaintenance.php">
 	<operation>
-		<search position="replace"><![CDATA['function' => 'Destroy',
-			'activities' => array(),
-		),]]></search>
-		<add><![CDATA['function' => 'Destroy',
-			'activities' => array(),
-		),
-		'hooks' => array(
-			'function' => 'SMF21_list_integration_hooks',
-			'activities' => array(),
-		),]]></add>
+		<search position="replace"><![CDATA[// Repairing boards.]]></search>
+		<add><![CDATA[// Retrieves info from the php_info function, scrubs and preps it for display
+function template_php_info()
+{
+	global $context, $txt;
+
+	echo '
+					<div id="admin_form_wrapper">
+						<div id="section_header" class="cat_bar">
+							<h3 class="catbg">',
+								$txt['phpinfo_settings'], '
+							</h3>
+						</div>';
+
+	// for each php info area
+	foreach ($context['pinfo'] as $area => $php_area)
+	{
+		echo '
+						<table id="', str_replace(' ', '_', $area), '" class="table_grid" width="100%">
+							<thead>
+								<tr class="title_bar">
+									<th class="first_th" scope="col" width="33%"></th>
+									<th scope="col" width="33%" class="centercol"><strong>', $area, '</strong></th>
+									<th class="last_th" scope="col" width="33%"></th>
+								</tr>
+							</thead>
+							<tbody>';
+
+		$alternate = true;
+		$localmaster = true;
+
+		// and for each setting in this category
+		foreach ($php_area as $key => $setting)
+		{
+			// start of a local / master setting (3 col)
+			if (is_array($setting))
+			{
+				if ($localmaster)
+				{
+					// heading row for the settings section of this categorys settings
+					echo '
+								<tr class="title_bar">
+									<td width="33%"><strong>', $txt['phpinfo_itemsettings'], '</strong></td>
+									<td width="33%"><strong>', $txt['phpinfo_localsettings'], '</strong></td>
+									<td width="33%"><strong>', $txt['phpinfo_defaultsettings'], '</strong></td>
+								</tr>';
+					$localmaster = false;
+				}
+
+				echo '
+								<tr>
+									<td align="left" width="33%" class="windowbg', $alternate ? '2' : '', '">', $key, '</td>';
+
+				foreach ($setting as $key_lm => $value)
+				{
+					echo '
+									<td align="left" width="33%" class="windowbg', $alternate ? '2' : '', '">', $value, '</td>';
+				}
+				echo '
+								</tr>';
+			}
+			// just a single setting (2 col)
+			else
+			{
+				echo '
+								<tr>
+									<td align="left" width="33%" class="windowbg', $alternate ? '2' : '', '">', $key,  '</td>
+									<td align="left" class="windowbg', $alternate ? '2' : '', '" colspan="2">', $setting, '</td>
+								</tr>';
+			}
+
+			$alternate = !$alternate;
+		}
+		echo '
+							</tbody>
+						</table>
+						<br>';
+	}
+
+	echo '
+					</div>';
+}
+
+// Repairing boards.]]></add>
 	</operation>
 </file>
 </modification>

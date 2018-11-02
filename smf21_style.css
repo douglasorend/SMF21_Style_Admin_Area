@@ -1,3 +1,30 @@
+/* Styles for the PHP info screen.
+------------------------------------------------------- */
+#taskpad .button_submit, #admincenter, #admin_form_wrapper {
+	margin: 5px 0 5px 0;
+}
+.action_admin .table_grid th, .action_admin .table_grid .first_th, .action_admin .table_grid .last_th {
+	border-radius: 0;
+	border-top: 2px solid #ff9400;
+	border-bottom: 2px solid #bf6900;
+	padding: 6px 6px 5px 6px;
+	background: #fff;
+	color: #666;
+}
+.action_admin .table_grid .last_th, .action_admin .table_grid td {
+	border: 1px solid #ddd;
+	border-top: 0;
+}
+.action_admin .table_grid tr:nth-child(even) {
+	background: #fdfdfd;
+}
+.action_admin .table_grid tr:nth-child(odd) {
+	background: #f8f8f8;
+}
+.action_admin .generic_list .flow_auto {
+	padding: 4px 2px;
+}
+
 /* Styles for the admin home screen.
 ------------------------------------------------------- */
 fieldset.admin_group legend {

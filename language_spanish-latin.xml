@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>dougiefresh:ReorganizedAdminArea</id>
+<name>SMF 2.1-style Admin Area</name>
+<version>1.10</version>
+
+<!-------------------------------------------------------------------------->
+<!-- Language file edits (Spanish Latin - Rock Lee - Admin)               -->
+<!-------------------------------------------------------------------------->
+<file name="$languagedir/Admin.spanish_latin.php" error="skip">
+	<operation>
+		<search position="after"><![CDATA[global $settings, $scripturl;]]></search>
+		<add><![CDATA[
+		
+// BEGIN: Reorganized Admin Area
+$txt['security_settings'] = 'Seguridad';
+// END: Reorganized Admin Area]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[$txt['load_balancing_settings'] = 'Balanceo de carga';]]></search>
+		<add><![CDATA[$txt['load_balancing_settings'] = 'Balanceo de carga';
+$txt['phpinfo_settings'] = 'Informaci&oacute;n de PHP';
+$txt['phpinfo_localsettings'] = 'Configuraciones locales';
+$txt['phpinfo_defaultsettings'] = 'Configuraci&oacute;n por defecto';
+$txt['phpinfo_itemsettings'] = 'Ajustes';]]></add>
+	</operation>
+</file>
+
+<file name="$languagedir/Admin.spanish_latin-utf8.php" error="skip">
+	<operation>
+		<search position="after"><![CDATA[global $settings, $scripturl;]]></search>
+		<add><![CDATA[
+		
+// BEGIN: Reorganized Admin Area
+$txt['security_settings'] = 'Seguridad';
+// END: Reorganized Admin Area]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[$txt['load_balancing_settings'] = 'Balanceo de carga';]]></search>
+		<add><![CDATA[$txt['load_balancing_settings'] = 'Balanceo de carga';
+$txt['phpinfo_settings'] = 'Información de PHP';
+$txt['phpinfo_localsettings'] = 'Configuraciones locales';
+$txt['phpinfo_defaultsettings'] = 'Configuración por defecto';
+$txt['phpinfo_itemsettings'] = 'Ajustes';]]></add>
+	</operation>
+</file>
+</modification>
